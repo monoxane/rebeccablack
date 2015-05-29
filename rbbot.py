@@ -165,8 +165,6 @@ class apis(object):
 
 	def getYT(self,url):
 		self.url = url
-		#self.url = self.url
-		#self.url = self.url.translate(None,'!#$@')
 		self.req = urllib2.Request(self.url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.18 Safari/537.36'})
 		self.parsed = json.load(urllib2.urlopen(self.req))
 		return self.parsed

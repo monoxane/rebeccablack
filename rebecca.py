@@ -6,23 +6,29 @@ from pprint import pprint
 import datetime
 import signal
 import time
+import ConfigParser
+import io
+
+with open("config.ini") as f:
+	config = f.read()
+cfg = ConfigParser.RawConfigParser()
+cfg.readfp(io.BytesIO(config))
 
 ### IRC INFO
-server = "irc.freenode.net"
-port = 6697
+server = cfg.get('becky','server')
+port = int(cfg.get('becky','port'))
 bot = rbbot.RBbot(server,port)
-channel="#crude"
-#channel="##dkdelidj"
-botnick="rebeccablack"
-password="rebeccaBLACKBOTdotcom123@@?@"
+channel= cfg.get('becky','channel')
+botnick= cfg.get('becky','botnick')
+password= cfg.get('becky','password')
 
 ### TWEET INFO
 urljs = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=officialjaden&count=200&include_rts=false"
 urlrb = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=MsRebeccaBlack&count=100&include_rts=false"
 urlrb1 = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=MsRebeccaBlack&count=1&include_rts=false"
-key = 'IxlbLbl66jzSHycSD6kSk9X4B'
-secret = 'RwsMIAK7usf7ZUN6D0njI7zOeRcYah7ocUnwCeModPIUukHr7b'
-ytkey = "AIzaSyC5cjjK7eTCEoTp093O5pJHLWwJojSdSio"
+key = cfg.get('becky','key')
+secret = cfg.get('becky','secret')
+ytkey = cfg.get('becky','ytkey')
 urlyt = "https://www.googleapis.com/youtube/v3/search?safeSearch=none&part=snippet&type=video&maxResults=1&key="+ytkey+"&q="
 ytstats = "https://www.googleapis.com/youtube/v3/videos?part=statistics&key="+ytkey+"&id="
 
