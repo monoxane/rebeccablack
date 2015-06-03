@@ -8,6 +8,9 @@ import signal
 import time
 import ConfigParser
 import io
+from isodate import parse_duration
+from time import strftime
+from time import gmtime
 
 with open("config.ini") as f:
 	config = f.read()
@@ -30,7 +33,7 @@ key = cfg.get('becky','key')
 secret = cfg.get('becky','secret')
 ytkey = cfg.get('becky','ytkey')
 urlyt = "https://www.googleapis.com/youtube/v3/search?safeSearch=none&part=snippet&type=video&maxResults=1&key="+ytkey+"&q="
-ytstats = "https://www.googleapis.com/youtube/v3/videos?part=statistics&key="+ytkey+"&id="
+ytstats = "https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&key="+ytkey+"&id="
 
 ### SET NICK AND JOIN CHANNEL
 bot.set_nick(botnick,password)
@@ -149,7 +152,8 @@ while bot.connected == True:
 					try:
 						yts = ytstats+result["items"][0]["id"]["videoId"]
 						stats = apiObject.getYT(yts)
-						tellthecunts = result["items"][0]["snippet"]["title"]+" by "+result["items"][0]["snippet"]["channelTitle"]+" -> Views: "+stats["items"][0]["statistics"]["viewCount"]+" | L/D: "+stats["items"][0]["statistics"]["likeCount"]+"/"+stats["items"][0]["statistics"]["dislikeCount"]+" -> https://youtu.be/"+result["items"][0]["id"]["videoId"]
+						dur = strftime('%M:%S',gmtime(parse_duration(stats["items"][0]["contentDetails"]["duration"]).seconds))
+						tellthecunts = result["items"][0]["snippet"]["title"]+" ("+dur+") by "+result["items"][0]["snippet"]["channelTitle"]+" -> Views: "+stats["items"][0]["statistics"]["viewCount"]+" | L/D: "+stats["items"][0]["statistics"]["likeCount"]+"/"+stats["items"][0]["statistics"]["dislikeCount"]+" -> https://youtu.be/"+result["items"][0]["id"]["videoId"]
 						bot.messg(tellthecunts,"g")
 					except IndexError:
 						bot.messg("can't find your shit video","g")
