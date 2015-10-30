@@ -94,7 +94,7 @@ class RBbot(object):
 				endof = weekStr[len(bar):]
 				bar = bar+endof
 				bar="[{b:19}]".format(b=bar)
-				self.ircsock.send("PRIVMSG "+self.chan+" :you wish it was you " + self.insult.adjective() + " " + self.insult.nouns() +"\r\n")
+				self.ircsock.send("PRIVMSG "+self.chan+" :you wish it was you \x0313" + self.insult.adjective() + " " + self.insult.nouns() +"\r\n")
 				time.sleep(1)
 				self.ircsock.send("PRIVMSG "+self.chan+" :consult this graph you cunt:\r\n")
 				self.ircsock.send("PRIVMSG "+self.chan+" :" + bar+" it aint fucking friday\r\n")
@@ -124,9 +124,9 @@ class RBbot(object):
 		self.ircsock.send("PRIVMSG "+self.chan+" :YTFRIDAYMATHAFAKKAAAAAAAAAA\r\n")
 		time.sleep(1)
 		self.ircsock.send("PRIVMSG "+self.chan+" :the graph dont lie cunt\r\n")
-		self.ircsock.send("PRIVMSG "+self.chan+" :[┌∩┐ ┌∩┐ ┌∩┐┌∩┐ᕦ(ò_óˇ)ᕤ ┌∩┐┌∩┐ᕦ(ò_óˇ)ᕤ ᶠᶸᶜᵏ♥ᵧₒᵤ ╭∩╮]\r\n")
+		self.ircsock.send("PRIVMSG "+self.chan+" :[┌∩┐ ┌∩┐ ┌∩┐┌∩┐ᕦ(ò_óˇ)ᕤ ┌∩┐┌∩┐ᕦ(ò_óˇ)ᕤ \x0313ᶠᶸᶜᵏ♥ᵧₒᵤ\x03 ╭∩╮]\r\n")
 		time.sleep(1)
-		self.ircsock.send("PRIVMSG "+self.chan+" :┌∩┐\r\n")
+		self.ircsock.send("PRIVMSG "+self.chan+" :\x033,13┌∩┐\r\n")
 
 
 class Tweets(object):
